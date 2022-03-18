@@ -1,0 +1,40 @@
+% form01_header.tex
+% 2017-05-28 Split from form00_header.tex to move \input{kakenhiLaTeX7.sty} to mother_1.tex.
+% 2021-01-28 Set margins.
+% ===== Parameters for KL (Kakenhi LaTeX) ========================
+%%\geometry{noheadfoot,scale=1}  %scale=1 resets margins to 0
+\setlength{\unitlength}{1pt}
+
+\newlength{\KLCella}
+\newlength{\KLCellb}
+\newlength{\KLCellc}
+\newlength{\KLCelld}
+\newlength{\KLCelle}
+\newlength{\KLCellf}
+
+\newcounter{KLMaxYearCount}	% # of years for the proposal
+\newcommand{\KLCLLang}{}	% language-dependent left-justification in tabular
+
+% ===== format and header =========
+% 2021-01-28: Set it to match the margins (17.4 mm on sides (why??), 20 mm on top and bottom). 
+% 		On Word, it is set to 16.2 mm, but setting it as 17.4 reproduces the original.
+% A4: 294 mm x 210 mm.  
+% LaTeX's default margin is 1 inch = 25.4 mm.
+\setlength{\oddsidemargin}{-22pt}	% (17.4 - 25.4) / 25.4 * 72 pt/inch = -26 pt
+\setlength{\evensidemargin}{-22pt}
+\setlength{\textwidth}{496pt}		% (210 - 17.4*2) / 25.4 * 72 = 503 pt
+\setlength{\topmargin}{-67pt}	% This and \headheight determine the actual top margin
+\setlength{\textheight}{254mm}		% (294 - 20*2) = 254 mm
+
+\setlength{\headheight}{48pt}
+\setlength{\headsep}{3pt}
+
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt}
+
+\pagestyle{empty}
+% ==== other applications table =========
+\newcommand{\KLTableHeaderFont}{\fontsize{8.2}{11}\selectfont}
+\newcommand{\KLTableHeaderSmallFont}{\fontsize{7.5}{10}\selectfont}
+\newcommand{\KLTableHeaderSmallerFont}{\fontsize{7}{10}\selectfont}
+

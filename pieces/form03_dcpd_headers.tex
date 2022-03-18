@@ -1,0 +1,92 @@
+% form04_dcpd_headers.tex
+% 2017-08-20 Taku form04_jsps_header.tex
+% 2017-08-29 Taku
+%			Added a check against jsps-abs-p1-header.
+% 2017-09-02 Taku
+%			Added sectionNo to the commands to make them compatible with 
+%			\KLBeginSubjectWithHeaderCommands.
+%			Use \KLJInt.
+% 2018-09-01 Taku
+%			Adjusted the heights of the headers by inserting \vspace{-3pt} and \rule.
+% 2021-01-28 Taku
+%			Modified form04_jsps_header.tex to form04_dcpd_header.tex for the new style.
+% 2021-02-03 Taku
+%			If 研究種目名 for \DCPDVeryFirstPageStyle is empty, do not add a space
+%			before "申請内容ファイル" on the top right.
+% 2022-01-23 Taku
+%			Added 申請者登録名 at the bottom.
+% 2022-01-26 Taku
+%			Changed \headerfont size from 10 to 10.5.
+%			Use zenkaku font for page number.  (sigh ...)
+%
+\newcommand{\headerfont}{\fontsize{10.5}{10.5}\selectfont}
+\newcommand{\contHeaderFont}{\fontsize{8}{8}\selectfont}
+% ===== Headers =====================================
+\newcommand{\DCPDVeryFirstPageStyle}[5]{%
+%	Defines the header for the very first page of the form.
+%	Called from \KLShumokuFirstPageStyle in form04_***.
+%--------------------------------
+%	#1: page style name
+%	#2: 様式
+%	#3: 研究種目名
+%	#4: 項目名
+%	#5: sectionNo
+%--------------------------------
+	\fancypagestyle{DCPDVeryFirstPageStyle}{% The name is not taken from #1, because 
+		\fancyhf{}
+		\ifthenelse{\equal{#3}{}}{%
+			\newcommand{\spaceBefore申請内容ファイル}{}
+		}{%
+			\newcommand{\spaceBefore申請内容ファイル}{\ }
+		}
+        		\fancyhead[R]{\headerfont(#3\spaceBefore申請内容ファイル 申請内容ファイル)\vspace{-23pt}\\
+        			\rule{0pt}{0pt}\\}
+%		\cfoot{\vspace{-2pt}--\ \thepage\ --}
+		\cfoot{\vspace{-2pt}--\ \KLJInt{\thepage}\ --}
+		\lfoot{\vspace{-2pt}\hspace{104mm}\underline{申請者登録名　　　　　　　　　　　　}}
+		\rfoot{\vspace{-2pt}\underline{\研究代表者氏名}}
+	}
+	\thispagestyle{DCPDVeryFirstPageStyle}
+}
+
+\newcommand{\DCPDFirstSubjectPageStyle}[5]{%
+%	Defines the header for the first page for the subject.
+%	Called from \KLShumokuFirstPageStyle in form04_***.
+%--------------------------------
+%	#1: page style name
+%	#2: 様式
+%	#3: 研究種目名
+%	#4: 項目名
+%	#5: sectionNo
+%--------------------------------
+	\fancypagestyle{DCPDFirstSubjectPageStyle}{%
+		\fancyhf{}
+%		\cfoot{\vspace{-2pt}--\ \thepage\ --}
+		\cfoot{\vspace{-2pt}--\ \KLJInt{\thepage}\ --}
+		\lfoot{\vspace{-2pt}\hspace{104mm}\underline{申請者登録名　　　　　　　　　　　　}}
+		\rfoot{\vspace{-2pt}\underline{\研究代表者氏名}}
+	}
+	\thispagestyle{DCPDFirstSubjectPageStyle}
+}
+
+\newcommand{\DCPDDefaultPageStyle}[5]{%
+%	Defines the default header for the subject.
+%	Called from \KLShumokuDefaultPageStyle in form04_***.
+%--------------------------------
+%	#1: page style name
+%	#2: 様式
+%	#3: 研究種目名
+%	#4: 項目名
+%	#5: sectionNo
+%--------------------------------
+	\fancypagestyle{DCPDDefaultPageStyle}{%
+		\fancyhf{}
+		\fancyhead[L]{\contHeaderFont{(#4の続き)}}
+%		\cfoot{\vspace{-2pt}--\ \thepage\ --}
+		\cfoot{\vspace{-2pt}--\ \KLJInt{\thepage}\ --}
+		\lfoot{\vspace{-2pt}\hspace{104mm}\underline{申請者登録名　　　　　　　　　　　　}}
+		\rfoot{\vspace{-2pt}\underline{\研究代表者氏名}}
+        }
+        \pagestyle{DCPDDefaultPageStyle}
+}
+
