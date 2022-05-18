@@ -9,15 +9,17 @@
 \noindent [\textbf{研究計画の背景}]
 %事例を持ってくる？ 
 
-近年、クラウドコンピューティングが普及している。これはクラウドベンダから計算資源をオンデマンドに借りる仕組みである。しかしこの仕組みは、\amikake{\textbf{クラウドベンダが攻撃者にならないという信用}}の元でのみ成り立つ。個人情報や営業秘密を含むプログラムなどを扱う場合、このような\amikake{\textbf{信用は前提とするべき}} \amikake{\textbf{でない}}。ベンダを信用しない場合、クラウドコンピューティングには２つの問題がある。\ref{prob:maliciousvender}データとプログラムがベンダに見えることと、\ref{prob:verifiability}実行結果がプログラムの出力だと保証できないことである。図１にこれらの問題をまとめた。これらは暗号学により解決可能\ref{paper:mktfhe}\ref{paper:boostVC}だが、都度の暗号化、復号を伴うため、\amikake{\textbf{オンプレミスのサーバと同様に扱える利便性}}が損なわれる。従って、これらの問題は\ref{prob:usability}利便性の維持をしたまま達成されなければならない。
-
-　
+近年、クラウドコンピューティングが普及している。これはクラウドベンダから計算資源をオンデマンドに借りる仕組みである。しかしこの仕組みは、\amikake{\textbf{クラウドベンダが攻撃者にならないという信用}}の元でのみ成り立つ。個人情報や営業秘密を含むプログラムなどを扱う場合、このような\amikake{\textbf{信用は前提とするべきでない}}。
+ベンダを信用しない場合、\ref{prob:maliciousvender}\amikake{\textbf{データとプログラムがベンダに見える}}ことがまず問題になる。
+これは準同型暗号により解決可能\ref{paper:mktfhe}だが、暗号特有の制約によりオンプレミスのサーバと同様に扱える\ref{prob:usability}\amikake{\textbf{利便性が損なわれる}}。
+また、ベンダはコストを抑えるために偽の結果を返す可能性があり、\ref{prob:verifiability}実行結果がプログラムの出力だと保証できないことも問題になる。
+図\ref{fig:problem}にこれらの問題をまとめた。
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/problem.drawio.pdf}
     \vspace*{-0.5cm}
-    \caption{クラウドコンピューティングの問題点}
-    \label{fig:my_label}
+    \caption{既存のクラウドコンピューティングの問題点}
+    \label{fig:problem}
 \end{figure}
 
 \noindent[\textbf{課題・分野の状況}]
@@ -31,8 +33,8 @@
 \setlength{\itemsep}{0cm} % 項目間
 % パラレルにする（利便性の維持を変更するか他を合わせる
     \item \underline{\textbf{データとプログラムがクラウドベンダに見える}}: 図１に示すように、クラウドコンピューティングではサーバ上でデータとプログラムは復号される。準同型暗号を用いれば暗号化したまま計算を行えるが、webサービスのようにプログラム提供者とデータ提供者が分かれる場合、計算量が鍵の本数の２乗に比例する[1]という問題がある。\label{prob:maliciousvender}
+    \item  \underline{\textbf{利便性が損なわれる}}: 我々の過去の研究[4]では暗号化したままC言語を実行可能である。しかし、独自ISAを採用したためにコンパイラも独自であり、他の言語がサポートできていない。\label{prob:usability}
     \item  \underline{\textbf{実行結果がプログラムの出力だと保証できない}}: クラウドベンダはコストを抑えるため、プログラムを実行せず偽の結果を返す可能性がある。\amikake{\textbf{Verifiable Computation(VC)}}を用いれば結果がプログラムの実行結果であるかを検証できる。しかし、適用された準同型暗号が限られている[2]か、実装が存在しない[3]。\label{prob:verifiability}
-    \item  \underline{\textbf{利便性の維持}}: 我々の過去の研究[4]では暗号化したままC言語を実行可能である。しかし、独自ISAを採用したためにコンパイラも独自であり、他の言語がサポートできていない。\label{prob:usability}
 \end{enumerate}
 
 \noindent[\textbf{着想に至った経緯}]
