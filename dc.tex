@@ -27,6 +27,10 @@
  \usepackage[inline]{enumitem}
  \usepackage{color}
  \newcommand{\amikake}[1]{\colorbox[gray]{0.8}{#1}}
+ \usepackage{cleveref}
+\crefmultiformat{enumi}%
+{[#2#1#3}{,~#2#1#3]}{,#2#1#3}{,#2#1#3]}
+\crefformat{enumi}{[#2#1#3]}
 % \usepackage{breakurl}
 %\usepackage{amssymb}
 %\usepackage{mb}
